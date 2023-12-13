@@ -28,10 +28,9 @@ public class SnakeGrow : MonoBehaviour
         }
     }
 
-    private void OnBecameInvisible()
-    {
-        Destroy(gameObject);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
+    // private void OnBecameInvisible()
+    // {
+    //    
+    // }
     
 }

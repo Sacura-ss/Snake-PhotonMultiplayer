@@ -13,7 +13,6 @@ namespace UI
 {
     public class MainPanel : MonoBehaviourPunCallbacks
     {
-        [SerializeField] private Button _startButton;
         [SerializeField] private TMP_Text _errorText;
         
         [Header("Room creating")]
@@ -24,22 +23,14 @@ namespace UI
         [SerializeField] private RoomListItem _roomListItemPrefab;
         [SerializeField] private Transform _contentTransform;
 
-        private void OnEnable()
+        public override void OnEnable()
         {
-            _startButton.onClick.AddListener(LoadGame);
             _createRoomButton.onClick.AddListener(CreateRoom);
         }
-        
-        private void OnDisable()
-        {
-            _startButton.onClick.RemoveListener(LoadGame);
-            _createRoomButton.onClick.RemoveListener(CreateRoom);
-        }
 
-        private void LoadGame()
+        public override void OnDisable()
         {
-            SavedData.CreatePlayers(1);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+            _createRoomButton.onClick.RemoveListener(CreateRoom);
         }
 
         private void CreateRoom()
@@ -56,26 +47,29 @@ namespace UI
                 RoomOptions roomOptions = new RoomOptions
                 {
                     MaxPlayers = 4,
-                    IsVisible = true
+                    IsVisible = true,
+                    IsOpen = true
                 };
 
                 PhotonNetwork.CreateRoom(_roomName.text, roomOptions, TypedLobby.Default);
-                // if(PhotonNetwork.CreateRoom(_roomName.text, roomOptions, TypedLobby.Default))
-                //     PhotonNetwork.LoadLevel("Game");
             }
         }
 
         public override void OnRoomListUpdate(List<RoomInfo> roomList)
         {
             Debug.Log("UPDATE LIST");
-            foreach (var roomInfo in roomList)
-            {
-                RoomListItem roomListItem = Instantiate(_roomListItemPrefab, _contentTransform);
-                if (roomListItem != null)
-                {
-                    roomListItem.SetInfo(roomInfo);
-                }
-            }
         }
+        // public override void OnRoomListUpdate(List<RoomInfo> roomList)
+        // {
+        //     Debug.Log("UPDATE LIST");
+        //     foreach (var roomInfo in roomList)
+        //     {
+        //         RoomListItem roomListItem = Instantiate(_roomListItemPrefab, _contentTransform);
+        //         if (roomListItem != null)
+        //         {
+        //             roomListItem.SetInfo(roomInfo);
+        //         }
+        //     }
+        // }
     }
 }

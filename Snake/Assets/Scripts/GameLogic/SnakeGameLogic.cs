@@ -12,6 +12,7 @@ namespace GameLogic
     {
         [Header("Objects for game")]
         [SerializeField] private List<SpawnObject> _spawnPrefabs;
+        [SerializeField] private GameObject _snakePrefab;
 
         [Header("Speed Settings")]
         [SerializeField] private float _spawnSpeedInSeconds = 1f;
@@ -52,6 +53,7 @@ namespace GameLogic
         private void Start()
         {
             StartCoroutine(EnableCountObjectsByTime());
+            Instantiate(_snakePrefab);
         }
 
         private void Spawn()

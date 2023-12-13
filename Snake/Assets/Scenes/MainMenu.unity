@@ -1696,7 +1696,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 391184861}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.6666667
+  m_Size: 0.66666675
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2064,7 +2064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6959e327e8eba89c9a85a65a36b4b133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  region: eu
+  region: ru
 --- !u!1 &1513891898
 GameObject:
   m_ObjectHideFlags: 0

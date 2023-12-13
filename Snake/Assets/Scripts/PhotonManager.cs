@@ -23,7 +23,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("You connected to "+ PhotonNetwork.CloudRegion);
-        PhotonNetwork.JoinLobby();
     }
 
     public override void OnDisconnected(DisconnectCause cause)
@@ -34,10 +33,18 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnCreatedRoom()
     {
         Debug.Log("Room is created with name " + PhotonNetwork.CurrentRoom.Name);
+        PhotonNetwork.JoinLobby();
+        //PhotonNetwork.LoadLevel("Game");
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         Debug.Log("Room dont created :" + message);
+    }
+
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("Join To room");
+        //PhotonNetwork.LoadLevel("Game");
     }
 }
