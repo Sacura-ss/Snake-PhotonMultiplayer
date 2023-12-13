@@ -9,7 +9,7 @@ namespace DefaultNamespace
         
         public const float PLAYER_RESPAWN_TIME = 2.0f;
 
-        public const int PLAYER_MAX_LIVES = 2;
+        public const int PLAYER_MAX_LIVES = 3;
 
         public const string PLAYER_LIVES = "PlayerLives";
         public const string PLAYER_READY = "IsPlayerReady";

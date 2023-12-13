@@ -204,7 +204,7 @@ namespace GameLogic
                 object lives;
                 if (p.CustomProperties.TryGetValue(SnakeGame.PLAYER_LIVES, out lives))
                 {
-                    if ((int) lives > 0)
+                    if ((int)lives > 0)
                     {
                         allDestroyed = false;
                         break;

@@ -15,13 +15,14 @@ GameObject:
   - component: {fileID: 1534179612753992051}
   - component: {fileID: 257187442990576588}
   - component: {fileID: -6903394767628633767}
+  - component: {fileID: -8973350398504256370}
   m_Layer: 0
   m_Name: bad_food
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3772420842550040407
 Transform:
   m_ObjectHideFlags: 0
@@ -103,8 +104,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetSizeOfSpawnedObject: 1
-  _disappearanceSpeedInSeconds: 4
-  SpeedUpValue: 0.3
+  _disappearanceSpeedInSeconds: 6
+  SpeedUpValue: 0.1
   MinSpeed: 2
 --- !u!58 &-6729445447324040104
 CircleCollider2D:
@@ -134,10 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3354f221bc6471e8194c5649f71c486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetSizeOfSpawnedObject: 2.5
-  _disappearanceSpeedInSeconds: 4
-  SpeedUpValue: 0.3
-  MinSpeed: 1
 --- !u!114 &257187442990576588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +169,22 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-8973350398504256370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3772420842550272887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1001 &6349531790448322193
 PrefabInstance:
   m_ObjectHideFlags: 0

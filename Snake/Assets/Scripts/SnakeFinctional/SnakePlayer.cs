@@ -58,7 +58,7 @@ public class SnakePlayer : MonoBehaviour
             return;
         }
 
-        if (Input.anyKey) _isStarted = true;
+        if (Input.anyKey && collider.enabled) _isStarted = true;
         
         if(_isStarted) velX = Input.GetAxisRaw("Horizontal");
 
@@ -99,7 +99,10 @@ public class SnakePlayer : MonoBehaviour
             || snakePosition.y > topRight.y + _saveBounds
             || snakePosition.y < bottomLeft.x - _saveBounds)
         {
-            gameObject.GetComponent<PhotonView>().RPC("DestroySnake", RpcTarget.All);
+            if (_photonView.IsMine)
+            {
+                gameObject.GetComponent<PhotonView>().RPC("DestroySnake", RpcTarget.All);
+            }
         }
     }
 
@@ -131,6 +134,8 @@ public class SnakePlayer : MonoBehaviour
             transform);
         _tailTransforms.Add(tail);
         _tailPositions.Add(tail.position);
+        
+        _photonView.Owner.AddScore(1);
     }
     
     [PunRPC]
@@ -141,6 +146,9 @@ public class SnakePlayer : MonoBehaviour
         {
             renderer.enabled = true;
         }
+
+        transform.position = new Vector2(0, 0);
+        transform.rotation = Quaternion.identity;
         //gameObject.SetActive(true);
     }
     
@@ -152,6 +160,8 @@ public class SnakePlayer : MonoBehaviour
         {
             renderer.enabled = false;
         }
+
+        _isStarted = false;
         //gameObject.SetActive(false);
         
         if (_photonView.IsMine)

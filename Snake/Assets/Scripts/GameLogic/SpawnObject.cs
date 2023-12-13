@@ -12,9 +12,9 @@ namespace GameLogic
         [Header("Spawn Settings")] [SerializeField]
         private float _targetSizeOfSpawnedObject = 1.2f;
 
-        [SerializeField] private float _disappearanceSpeedInSeconds = 4f;
-        [SerializeField] private float SpeedUpValue = 0.3f;
-        [SerializeField] private float MinSpeed = 1f;
+        [SerializeField] private float _disappearanceSpeedInSeconds = 6f;
+        [SerializeField] private float SpeedUpValue = 0.2f;
+        [SerializeField] private float MinSpeed = 2f;
 
         private bool isDestroyed;
         private PhotonView photonView;
@@ -26,7 +26,7 @@ namespace GameLogic
             photonView = GetComponent<PhotonView>();
         }
 
-        public override void OnEnable()
+        public void Start()
         {
             if (!photonView.IsMine) return;
             
@@ -38,7 +38,6 @@ namespace GameLogic
 
         public void OnCollisionEnter2D(Collision2D collision)
         {
-            Debug.Log("collision");
             if (isDestroyed)
             {
                 return;
@@ -97,8 +96,6 @@ namespace GameLogic
 
         private IEnumerator EnableDisappearanceObjects()
         {
-            gameObject.SetActive(true);
-
             Debug.Log("DIS " + gameObject);
             TryDisappearance(gameObject);
 

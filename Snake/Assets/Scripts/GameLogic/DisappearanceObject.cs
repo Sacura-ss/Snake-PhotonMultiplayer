@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace DisplayScripts.Services
 {
-    public class DisappearanceObject : SpawnObject
+    public class DisappearanceObject : MonoBehaviour
     {
         private Transform _transform;
         private IEnumerator _resizeCoroutine;

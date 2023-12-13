@@ -15,13 +15,14 @@ GameObject:
   - component: {fileID: 5339749891117512539}
   - component: {fileID: -1425599091078459263}
   - component: {fileID: 1734577563872487567}
+  - component: {fileID: -3428465415241364394}
   m_Layer: 0
   m_Name: body 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9047412063547889843
 Transform:
   m_ObjectHideFlags: 0
@@ -105,8 +106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetSizeOfSpawnedObject: 1
-  _disappearanceSpeedInSeconds: 4
-  SpeedUpValue: 0.3
+  _disappearanceSpeedInSeconds: 6
+  SpeedUpValue: 0.1
   MinSpeed: 2
 --- !u!114 &-8364057506558604346
 MonoBehaviour:
@@ -148,10 +149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3354f221bc6471e8194c5649f71c486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetSizeOfSpawnedObject: 2.5
-  _disappearanceSpeedInSeconds: 4
-  SpeedUpValue: 0.3
-  MinSpeed: 1
 --- !u!114 &1734577563872487567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +171,22 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-3428465415241364394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9047412063548191891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &9047412063548191893
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,6 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9047412063547889845}
   - component: {fileID: 9047412063560384183}
+  - component: {fileID: 5384934757601378967}
   m_Layer: 0
   m_Name: eyes
   m_TagString: Untagged
@@ -258,6 +272,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5384934757601378967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9047412063548191893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &9047412063548191895
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9047412063547889847}
   - component: {fileID: 9047412063560384185}
+  - component: {fileID: 7132731510190417462}
   m_Layer: 0
   m_Name: mouth
   m_TagString: Untagged
@@ -342,6 +379,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7132731510190417462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9047412063548191895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &9047412063548191899
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,6 +411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9047412063547889851}
   - component: {fileID: 9047412063560384187}
+  - component: {fileID: 1479196472655931879}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -426,3 +486,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1479196472655931879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9047412063548191899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
