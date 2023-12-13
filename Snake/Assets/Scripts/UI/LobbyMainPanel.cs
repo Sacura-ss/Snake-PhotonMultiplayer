@@ -17,6 +17,7 @@ namespace UI
         [Header("Selection Panel")] public GameObject SelectionPanel;
         public Button RandomRoomButton;
         public Button RoomListButton;
+        public Button CreateRoomButtonSelection;
 
         [Header("Create Room Panel")] public GameObject CreateRoomPanel;
         public Button CancelButton;
@@ -50,6 +51,7 @@ namespace UI
             LoginButton.onClick.AddListener(OnLoginButtonClicked);
             RoomListButton.onClick.AddListener(OnRoomListButtonClicked);
             StartGameButton.onClick.AddListener(OnStartGameButtonClicked);
+            CreateRoomButtonSelection.onClick.AddListener(()=>SetActivePanel("CreateRoomPanel"));
             base.OnEnable();
         }
 
@@ -63,6 +65,7 @@ namespace UI
             LoginButton.onClick.RemoveListener(OnLoginButtonClicked);
             RoomListButton.onClick.RemoveListener(OnRoomListButtonClicked);
             StartGameButton.onClick.RemoveListener(OnStartGameButtonClicked);
+            CreateRoomButtonSelection.onClick.RemoveListener(()=>SetActivePanel("CreateRoomPanel"));
             base.OnDisable();
         }
 

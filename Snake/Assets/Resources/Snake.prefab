@@ -9,11 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1186067749993358979}
-  - component: {fileID: 1186067749993358976}
   - component: {fileID: 1186067749993358991}
   - component: {fileID: 1186067749993358990}
-  - component: {fileID: 1186067749993358977}
   - component: {fileID: 197419530}
+  - component: {fileID: 7414469569408681275}
   m_Layer: 0
   m_Name: Snake
   m_TagString: Untagged
@@ -39,21 +38,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1186067749993358976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186067749993358978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d199ec8be53068400879daec5d7912a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moveSpeed: 3
-  _rotationSpeed: 200
-  _saveBounds: 2
 --- !u!114 &1186067749993358991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,6 +52,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tailTransform: {fileID: 1186067750156715657}
   _circleDiameter: 0.48
+  _moveSpeed: 3
+  _rotationSpeed: 200
+  _saveBounds: 2
 --- !u!58 &1186067749993358990
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -84,19 +71,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.48
---- !u!114 &1186067749993358977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186067749993358978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9aece54bf4ebb77519059627a797df24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _snakeTail: {fileID: 1186067749993358991}
 --- !u!50 &197419530
 Rigidbody2D:
   serializedVersion: 4
@@ -105,19 +79,41 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1186067749993358978}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7414469569408681275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186067749993358978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1186067750156715656
 GameObject:
   m_ObjectHideFlags: 0
