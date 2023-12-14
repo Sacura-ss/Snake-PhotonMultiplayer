@@ -75,7 +75,7 @@ namespace GameLogic
 
             while (timer > 0.0f)
             {
-                InfoText.text = string.Format("Player {0} won with {1} points.\n\n\nReturning to login screen in {2} seconds.", winner, score, timer.ToString("n2"));
+                InfoText.text = string.Format("Player {0} won with {1} points.\n\n\nReturning to login screen in {2} seconds.", winner, score, timer.ToString("n1"));
 
                 yield return new WaitForEndOfFrame();
 
@@ -183,6 +183,7 @@ namespace GameLogic
 
                 if (p.CustomProperties.TryGetValue(SnakeGame.PLAYER_LOADED_LEVEL, out playerLoadedLevel))
                 {
+                    Debug.Log("VAR " + playerLoadedLevel);
                     if ((bool) playerLoadedLevel)
                     {
                         continue;
