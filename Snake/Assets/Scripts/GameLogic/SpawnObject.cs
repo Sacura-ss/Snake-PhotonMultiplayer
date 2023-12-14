@@ -45,11 +45,12 @@ namespace GameLogic
 
             if (collision.gameObject.TryGetComponent(out SnakePlayer snake))
             {
+                //snake.AddTail();
+                snake.gameObject.GetComponent<PhotonView>().RPC("AddTail", RpcTarget.All);
                 if (photonView.IsMine)
                 {
                     if (TryGetComponent(out Food.Food food))
                     {
-                        snake.AddTail();
                         DestroySpawnObjectGlobally();
                     }
                     else if (TryGetComponent(out Food.BadFood badFood))

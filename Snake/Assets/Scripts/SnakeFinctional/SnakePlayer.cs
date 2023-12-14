@@ -108,6 +108,7 @@ public class SnakePlayer : MonoBehaviour
 
     private void MoveTail()
     {
+        Debug.Log("MoveTail");
         float distance = ((Vector2)_tailTransform.position - _tailPositions[0]).magnitude;
 
         if (distance > _circleDiameter)
@@ -127,11 +128,15 @@ public class SnakePlayer : MonoBehaviour
         }
     }
 
+    [PunRPC]
     public void AddTail()
     {
         if (!_photonView.IsMine) return;
+        Debug.Log("AddTail");
         Transform tail = Instantiate(_tailTransform, _tailPositions[_tailPositions.Count - 1], Quaternion.identity,
             transform);
+        PhotonNetwork.InstantiateRoomObject(_tailTransform.name, _tailPositions[_tailPositions.Count - 1],
+            Quaternion.identity);
         _tailTransforms.Add(tail);
         _tailPositions.Add(tail.position);
         

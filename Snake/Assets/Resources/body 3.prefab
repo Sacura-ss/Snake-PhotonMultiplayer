@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8113178975393233496}
   - component: {fileID: 8113178975372155992}
   - component: {fileID: 7189149607482599693}
+  - component: {fileID: 2580739329224033983}
   m_Layer: 0
   m_Name: eyes
   m_TagString: Untagged
@@ -103,10 +104,27 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 2580739329224033983}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &2580739329224033983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8113178975393523640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &8113178975393523644
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +136,7 @@ GameObject:
   - component: {fileID: 8113178975393233500}
   - component: {fileID: 8113178975372155996}
   - component: {fileID: 7758824787639530897}
+  - component: {fileID: 9067700180333757170}
   m_Layer: 0
   m_Name: mouth
   m_TagString: Untagged
@@ -214,6 +233,22 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &9067700180333757170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8113178975393523644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &8113178975393523646
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,7 +416,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: -3764543867316292043}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -412,6 +448,7 @@ GameObject:
   - component: {fileID: 8113178975393235756}
   - component: {fileID: 8113178975372158252}
   - component: {fileID: 708470804765824391}
+  - component: {fileID: 6087038501735450570}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -508,3 +545,19 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &6087038501735450570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8113178975393525516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
