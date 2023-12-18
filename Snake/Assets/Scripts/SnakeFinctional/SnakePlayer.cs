@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+using DefaultNamespace.SnakeFinctional;
 using GameLogic;
 using Photon.Pun;
 using UnityEngine;
@@ -11,6 +12,7 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class SnakePlayer : MonoBehaviour
 {
     [SerializeField] private Transform _tailTransform;
+    [SerializeField] private GameObject _tailPrefab;
     [SerializeField] private float _circleDiameter;
 
     [SerializeField] private float _moveSpeed = 3f;
@@ -138,24 +140,32 @@ public class SnakePlayer : MonoBehaviour
         }
     }
 
-    [PunRPC]
-    public void AddTail(string snakePlayerName)
+    public void AddTailToSnake()
     {
         if (!_photonView.IsMine) return;
-        SnakePlayer snakePlayer = GameObject.Find(snakePlayerName).GetComponent<SnakePlayer>();
-        Debug.Log("AddTail");
-        Transform tail = Instantiate(_tailTransform, _tailPositions[_tailPositions.Count - 1], Quaternion.identity,
-            transform);
-        // Transform tail = PhotonNetwork.InstantiateRoomObject(_tailTransform.name,
-        //         snakePlayer.TailPositions[snakePlayer.TailPositions.Count - 1],
-        //     Quaternion.identity, 0).transform;
-        snakePlayer.TailTransforms.Add(tail);
-        snakePlayer.TailPositions.Add(tail.position);
-        tail.SetParent(snakePlayer.transform);
-        if (tail.TryGetComponent(out Renderer r))
-            r.material.color = SnakeGame.GetColor(snakePlayer.PhotonView.Owner.GetPlayerNumber());
+        //_photonView.RPC("AddTail", RpcTarget.AllViaServer);
+        AddTail();
+    }
 
-        snakePlayer.PhotonView.Owner.AddScore(1);
+    //[PunRPC]
+    public void AddTail()
+    {
+        Debug.Log("AddTail " + _photonView.Owner);
+        GameObject tail;
+        
+        //tail = Instantiate(_tailPrefab, position, Quaternion.identity) as GameObject;
+        tail = PhotonNetwork.Instantiate(_tailPrefab.name, _tailPositions[_tailPositions.Count-1], Quaternion.identity) as GameObject;
+        
+        tail.transform.SetParent(_tailTransform);
+        //tail.GetComponent<SnakeTail>().InitializeTail(_photonView.Owner, _photonView.transform);
+        
+       _tailTransforms.Add(tail.transform);
+       _tailPositions.Add(tail.transform.position);
+      
+        if (tail.TryGetComponent(out Renderer r))
+            r.material.color = SnakeGame.GetColor(_photonView.Owner.GetPlayerNumber());
+
+        _photonView.Owner.AddScore(1);
     }
 
     [PunRPC]

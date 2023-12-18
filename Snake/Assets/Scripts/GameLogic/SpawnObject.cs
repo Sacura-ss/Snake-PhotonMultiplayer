@@ -47,26 +47,27 @@ namespace GameLogic
         
             if (other.gameObject.TryGetComponent(out SnakePlayer snake))
             {
-                if (photonView.IsMine)
-                {
+                // if (photonView.IsMine)
+                // {
                     if (TryGetComponent(out Food.Food food))
                     {
-                        DestroySpawnObjectGlobally();
-                        snake.gameObject.GetComponent<PhotonView>().RPC("AddTail", RpcTarget.All, snake.name);
+                        if (photonView.IsMine) DestroySpawnObjectGlobally();
+                        //snake.gameObject.GetComponent<PhotonView>().RPC("AddTail", RpcTarget.All, snake.name);
                         //snake.AddTail();
+                        snake.AddTailToSnake();
                     }
                     else if (TryGetComponent(out Food.BadFood badFood))
                     {
                       
-                        badFood.PlayVFX();
-                        DestroySpawnObjectGlobally();
+                        if (photonView.IsMine)badFood.PlayVFX();
+                        if (photonView.IsMine) DestroySpawnObjectGlobally();
                         other.gameObject.GetComponent<PhotonView>().RPC("DestroySnake", RpcTarget.All);
                     }
-                }
-                else
-                {
-                    DestroySpawnObjectLocally();
-                }
+                //}
+                // else
+                // {
+                if (!photonView.IsMine) DestroySpawnObjectLocally();
+                // }
             }
         }
 
