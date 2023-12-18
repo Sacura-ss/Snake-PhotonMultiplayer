@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+using GameLogic;
 using Photon.Pun;
 using UnityEngine;
-
 using Photon.Pun.UtilityScripts;
 using UnityEngine.SceneManagement;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
@@ -16,20 +16,40 @@ public class SnakePlayer : MonoBehaviour
     [SerializeField] private float _moveSpeed = 3f;
     [SerializeField] private float _rotationSpeed = 200f;
     [SerializeField] private float _saveBounds = 2f;
-    
+
+
     private List<Transform> _tailTransforms = new();
     private List<Vector2> _tailPositions = new();
+
+    public List<Transform> TailTransforms
+    {
+        get => _tailTransforms;
+        set => _tailTransforms = value;
+    }
+
+    public List<Vector2> TailPositions
+    {
+        get => _tailPositions;
+        set => _tailPositions = value;
+    }
+
     private PhotonView _photonView;
-    
+
+    public PhotonView PhotonView
+    {
+        get => _photonView;
+        set => _photonView = value;
+    }
+
     private new Collider2D collider;
-    
+
     private float velX = 0f;
     private bool _isStarted;
 
     public void Awake()
     {
         _photonView = GetComponent<PhotonView>();
-        
+
         collider = GetComponent<Collider2D>();
     }
 
@@ -40,42 +60,32 @@ public class SnakePlayer : MonoBehaviour
             r.material.color = SnakeGame.GetColor(_photonView.Owner.GetPlayerNumber());
         }
 
-
         if (!_photonView.IsMine) return;
         _tailPositions.Add(_tailTransform.position);
     }
-    
+
     private void Update()
     {
-        if (!_photonView.AmOwner)
-        {
-            return;
-        }
+        if (!_photonView.AmOwner) return;
 
         // we don't want the master client to apply input to remote ships while the remote player is inactive
-        if (this._photonView.CreatorActorNr != PhotonNetwork.LocalPlayer.ActorNumber)
-        {
-            return;
-        }
+        if (this._photonView.CreatorActorNr != PhotonNetwork.LocalPlayer.ActorNumber) return;
 
         if (Input.anyKey && collider.enabled) _isStarted = true;
-        
-        if(_isStarted) velX = Input.GetAxisRaw("Horizontal");
+
+        if (_isStarted) velX = Input.GetAxisRaw("Horizontal");
 
         MoveTail();
-     
     }
-    
+
     private void FixedUpdate()
     {
-        if (!_photonView.IsMine)
-        
-            return;
-        
+        if (!_photonView.IsMine) return;
+
         if (!_isStarted) return;
-        
+
         transform.Translate(Vector3.up * _moveSpeed * Time.fixedDeltaTime, Space.Self);
-        
+
         transform.Rotate(Vector3.forward * -velX * _rotationSpeed * Time.fixedDeltaTime);
 
         CheckIfOverScreen();
@@ -87,7 +97,7 @@ public class SnakePlayer : MonoBehaviour
 
         _photonView.RPC("RespawnSnake", RpcTarget.AllViaServer);
     }
-    
+
     private void CheckIfOverScreen()
     {
         var topRight = Camera.main.ViewportToWorldPoint(Vector3.one);
@@ -129,34 +139,39 @@ public class SnakePlayer : MonoBehaviour
     }
 
     [PunRPC]
-    public void AddTail()
+    public void AddTail(string snakePlayerName)
     {
         if (!_photonView.IsMine) return;
+        SnakePlayer snakePlayer = GameObject.Find(snakePlayerName).GetComponent<SnakePlayer>();
         Debug.Log("AddTail");
         Transform tail = Instantiate(_tailTransform, _tailPositions[_tailPositions.Count - 1], Quaternion.identity,
             transform);
-        PhotonNetwork.InstantiateRoomObject(_tailTransform.name, _tailPositions[_tailPositions.Count - 1],
-            Quaternion.identity);
-        _tailTransforms.Add(tail);
-        _tailPositions.Add(tail.position);
-        
-        _photonView.Owner.AddScore(1);
+        // Transform tail = PhotonNetwork.InstantiateRoomObject(_tailTransform.name,
+        //         snakePlayer.TailPositions[snakePlayer.TailPositions.Count - 1],
+        //     Quaternion.identity, 0).transform;
+        snakePlayer.TailTransforms.Add(tail);
+        snakePlayer.TailPositions.Add(tail.position);
+        tail.SetParent(snakePlayer.transform);
+        if (tail.TryGetComponent(out Renderer r))
+            r.material.color = SnakeGame.GetColor(snakePlayer.PhotonView.Owner.GetPlayerNumber());
+
+        snakePlayer.PhotonView.Owner.AddScore(1);
     }
-    
+
     [PunRPC]
     public void RespawnSnake()
     {
-        collider.enabled = true;
+        transform.position = new Vector2(0, 0);
+        transform.rotation = Quaternion.identity;
+
         foreach (var renderer in GetComponentsInChildren<Renderer>())
         {
             renderer.enabled = true;
         }
 
-        transform.position = new Vector2(0, 0);
-        transform.rotation = Quaternion.identity;
-        //gameObject.SetActive(true);
+        collider.enabled = true;
     }
-    
+
     [PunRPC]
     public void DestroySnake()
     {
@@ -167,16 +182,16 @@ public class SnakePlayer : MonoBehaviour
         }
 
         _isStarted = false;
-        //gameObject.SetActive(false);
-        
+
         if (_photonView.IsMine)
         {
             object lives;
             if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(SnakeGame.PLAYER_LIVES, out lives))
             {
-                PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable {{SnakeGame.PLAYER_LIVES, ((int) lives <= 1) ? 0 : ((int) lives - 1)}});
+                PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable
+                    { { SnakeGame.PLAYER_LIVES, ((int)lives <= 1) ? 0 : ((int)lives - 1) } });
 
-                if (((int) lives) > 1)
+                if (((int)lives) > 1)
                 {
                     StartCoroutine("WaitForRespawn");
                 }

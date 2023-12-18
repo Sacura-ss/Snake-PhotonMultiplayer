@@ -75,7 +75,7 @@ namespace GameLogic
 
             while (timer > 0.0f)
             {
-                InfoText.text = string.Format("Player {0} won with {1} points.\n\n\nReturning to login screen in {2} seconds.", winner, score, timer.ToString("n1"));
+                InfoText.text = string.Format("Player {0} won with {1} points.\n\n\nGo to finish screen in {2} seconds.", winner, score, timer.ToString("n1"));
 
                 yield return new WaitForEndOfFrame();
 
@@ -162,10 +162,10 @@ namespace GameLogic
 
             
             float angularStart = (360.0f / PhotonNetwork.CurrentRoom.PlayerCount) * PhotonNetwork.LocalPlayer.GetPlayerNumber();
-            float x = 20.0f * Mathf.Sin(angularStart * Mathf.Deg2Rad);
-            float z = 20.0f * Mathf.Cos(angularStart * Mathf.Deg2Rad);
-            Vector3 position = new Vector3(x, 0.0f, z);
-            Quaternion rotation = Quaternion.Euler(0.0f, angularStart, 0.0f);
+            float x = 1.0f * Mathf.Sin(angularStart * Mathf.Deg2Rad);
+            float y = 1.0f * Mathf.Cos(angularStart * Mathf.Deg2Rad);
+            Vector3 position = new Vector3(x, y, 0.0f);
+            Quaternion rotation = Quaternion.Euler(0.0f, 0.0f, angularStart);
 
             PhotonNetwork.Instantiate(_snakePrefab.name, position, rotation, 0);      // avoid this call on rejoin (ship was network instantiated before)
 
