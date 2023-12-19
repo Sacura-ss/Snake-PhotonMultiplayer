@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+using DefaultNamespace.Saving;
 using DisplayScripts.Services;
 using Photon.Pun;
 using UnityEngine;
@@ -231,6 +232,9 @@ namespace GameLogic
                         score = p.GetScore();
                     }
                 }
+                
+                SavedData.WinnerName = winner;
+                SavedData.WinnerScore = score.ToString();
 
                 StartCoroutine(EndOfGame(winner, score));
             }
