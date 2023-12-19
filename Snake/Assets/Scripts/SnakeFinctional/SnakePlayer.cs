@@ -143,27 +143,20 @@ public class SnakePlayer : MonoBehaviour
     public void AddTailToSnake()
     {
         if (!_photonView.IsMine) return;
-        //_photonView.RPC("AddTail", RpcTarget.AllViaServer);
         AddTail();
     }
 
-    //[PunRPC]
-    public void AddTail()
+    private void AddTail()
     {
         Debug.Log("AddTail " + _photonView.Owner);
         GameObject tail;
         
-        //tail = Instantiate(_tailPrefab, position, Quaternion.identity) as GameObject;
         tail = PhotonNetwork.Instantiate(_tailPrefab.name, _tailPositions[_tailPositions.Count-1], Quaternion.identity) as GameObject;
         
         tail.transform.SetParent(_tailTransform);
-        //tail.GetComponent<SnakeTail>().InitializeTail(_photonView.Owner, _photonView.transform);
         
        _tailTransforms.Add(tail.transform);
        _tailPositions.Add(tail.transform.position);
-      
-        if (tail.TryGetComponent(out Renderer r))
-            r.material.color = SnakeGame.GetColor(_photonView.Owner.GetPlayerNumber());
 
         _photonView.Owner.AddScore(1);
     }
@@ -174,6 +167,12 @@ public class SnakePlayer : MonoBehaviour
         transform.position = new Vector2(0, 0);
         transform.rotation = Quaternion.identity;
 
+        foreach (var tailTransform in _tailTransforms)
+        {
+            if(tailTransform.TryGetComponent(out SnakeTail snakeTail))
+               snakeTail.Enable();
+        }
+        
         foreach (var renderer in GetComponentsInChildren<Renderer>())
         {
             renderer.enabled = true;
@@ -186,6 +185,16 @@ public class SnakePlayer : MonoBehaviour
     public void DestroySnake()
     {
         collider.enabled = false;
+        
+        // if (_photonView.IsMine)
+        // {
+            foreach (var tailTransform in _tailTransforms)
+            {
+                if(tailTransform.TryGetComponent(out SnakeTail snakeTail))
+                    snakeTail.Disable();
+            }
+        //}
+
         foreach (var renderer in GetComponentsInChildren<Renderer>())
         {
             renderer.enabled = false;
